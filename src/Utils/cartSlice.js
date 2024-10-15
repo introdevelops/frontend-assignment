@@ -58,7 +58,7 @@ const cart= createSlice({
            
             if(itemFound?.quantity>1){
                 itemFound.quantity=itemFound.quantity-currentItem.quantity;
-                console.log(state)
+                
                 window.localStorage.setItem("cart",JSON.stringify(state));
             }else{
                let filteredArray=[...state.cartItems.filter((element)=>{
