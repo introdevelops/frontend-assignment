@@ -4,7 +4,7 @@ import { addToCart ,removeFromCart} from '../Utils/cartSlice';
 
 
 
-const CartItem = ({itemDetails,item_id}) => {
+const CartItem = ({itemDetails,item_id,isCart}) => {
     
 
     const dispatch = useDispatch();
@@ -16,19 +16,26 @@ const CartItem = ({itemDetails,item_id}) => {
     }
 
     const handleRemoveFromCart = () =>{
-        dispatch(removeFromCart({...itemDetails,id:item_id}));
+        dispatch(removeFromCart({...itemDetails,id:item_id,quantity:1}));
     }
 
 
 
   return (<>
-  {itemDetails && <div style={{backgroundColor:"white", minWidth:"250px", width:"250px",  height:"230px", marginLeft:"1rem", marginBottom:"1rem",display:"flex", flexDirection:"column" , justifyContent:"space-around",  border:"black", borderRadius:"7px" }}>
+
+  {itemDetails && <div style={{backgroundColor:"white", minWidth:"250px", width:"250px",  height:"230px", marginLeft:"1rem", marginBottom:"1rem",display:"flex", flexDirection:"column" , justifyContent:"space-around",  border:"black", borderRadius:"7px", paddingBottom:"2px" }}>
    
+   
+
    <div style={{width:"100%",marginLeft:"1rem"}}>
    <div style={{backgroundColor:"", padding:"5px" ,margin:"0.6rem", width:"60%", fontSize:"18px"}}>Name:  {itemDetails?.name}</div>
 
    <div style={{backgroundColor:"", padding:"5px" ,margin:"0.6rem", width:"60%" , fontSize:"18px"}}>Price: {itemDetails?.price}</div>
+
+  {isCart && <div style={{backgroundColor:"", padding:"5px" ,margin:"0.6rem", width:"60%" , fontSize:"18px"}}>Quantity: {itemDetails?.quantity}</div>}
+
    </div>
+   
 
 
     <div style={{ width:"100%",}}>

@@ -24,6 +24,7 @@ export const products={
                     "name": "Face wash",
                     "price": 123
                 }
+                
             ]
         }
     ]

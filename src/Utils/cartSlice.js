@@ -8,6 +8,7 @@ const cart= createSlice({
     initialState:{
         cartItems:[],
         totalQuantity:0,
+       
     },
     reducers:{
 
@@ -52,28 +53,44 @@ const cart= createSlice({
          })
 
          if(itemFound){
-            state.totalQuantity=state.totalQuantity-itemFound.quantity;
-            const filteredArray=state.cartItems.filter((element)=>{
-                return element.id!==currentItem.id;
+            state.totalQuantity=state.totalQuantity-currentItem.quantity;
+            
+           
+            if(itemFound?.quantity>1){
+                itemFound.quantity=itemFound.quantity-currentItem.quantity;
+                console.log(state)
+                window.localStorage.setItem("cart",JSON.stringify(state));
+            }else{
+               let filteredArray=[...state.cartItems.filter((element)=>{
+                    return element.id!==currentItem.id;
+                })];
+                state.cartItems=[...filteredArray];
+                window.localStorage.setItem("cart",JSON.stringify(state));
+            }
+           
                
-            })
-            state.cartItems=[...filteredArray];
-            window.localStorage.setItem("cart",JSON.stringify(state));
+           
+           
+           
             console.log("Product Removed From the Cart : ",JSON.stringify(currentItem));
             console.log(JSON.stringify(state.cartItems));
             
             
          }
         else{ console.log("This Item is not in the cart!!");}
-
+         window.localStorage.setItem("cart",JSON.stringify(state));
         },
+
         getCart:(state,action)=>{
            
+            
             if(action.payload){
             state.cartItems=[...action.payload?.cartItems];
             state.totalQuantity=action.payload?.totalQuantity;
             }
-        }
+        },
+
+      
 
 
 
@@ -83,6 +100,6 @@ const cart= createSlice({
 }
 )
 
-export  const {addToCart,removeFromCart,getCart} = cart.actions;
+export  const {addToCart,removeFromCart,getCart,toggleIsCart} = cart.actions;
 
 export default cart.reducer;
