@@ -17,11 +17,11 @@ export const products={
             "name": "Household",
             "productList": [
                 {
-                    "name": "Hair Oil",
+                    "name": "Toothpaste",
                     "price": 122
                 },
                 {
-                    "name": "Face wash",
+                    "name": "Detergents",
                     "price": 123
                 }
                 
